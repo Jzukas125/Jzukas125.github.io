@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Cybersecurity Open Source Dashboard</title>
+</head>
+
+<body style="background-color: #c5c6c7;">
+    <header class="titleText">
+        Welcome to my Open Source Tool Dashboard
+    </header>
+    <main>
+        <div class="descriptionText">
+            Cyber Security Tools are important, and can be even considered part of your knowledge base.
+            The reason why the website is being made so I can categorize tools I have come across and make a neat
+            looking hub to store them.
+        </div>
+        <br></br>
+
+        <!-- Networking Tools Dropdown -->
+        <div id="accordion">
+            <div class="card accordionBody">
+                <!-- Controls the background in a collaspible card -->
+                <div class="card-header" id="headingNet">
+                    <h5 class="mb-0">
+                        <button class="titleText center btn btn-link" data-toggle="collapse" data-target="#collapseNet"
+                            aria-expanded="false" aria-controls="collapseNet">
+                            Networking Tools
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseNet" class="collapse center" aria-labelledby="headingNet" data-parent="#accordion">
+                    <div class="card-body">
+                        <!-- Body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#WireShark"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                WireShark
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="WireShark">
+                            <div class="card card-body padding">
+                                Wireshark is an open-source software application that is one of the most popular network
+                                protocol analyzers.
+                                Many people use it to capture and analyze data across a computer network.
+                                It facilitates detailed analyses of packets, exposing network protocol layers so users
+                                can effectively stare into events inside the network and manage flows, perform protocol
+                                investigations, probe faults, and explore their network and security domains.
+                                It is considered one of the most significant essential tools to have at your disposal.
+                                <a href="https://github.com/wireshark/wireshark">Github Home Page</a>
+                                <a href="https://www.wireshark.org/download.html">Installation Guide </a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+
+                        <!-- Body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#Nmap"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Nmap
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="Nmap">
+                            <div class="card card-body padding">
+                                Network Mapper (known as Nmap) is a freely available tool for network exploration and
+                                security assessment purposes.
+                                This software works by examining collapsibleButton through the transmission of packets
+                                and the
+                                responses they receive.
+                                It offers insights into hosts' details and information about services and accessible
+                                network ports.
+                                The versatility of Nmap allows it to perform functions like discovering vulnerabilities
+                                in systems, creating inventories of collapsibleButton, monitoring the availability of
+                                services,
+                                and detecting any unauthorized devices connected to the network.
+                                It is one of the most basic tools to utilize and one of the most essential.
+                                <a href="https://nmap.org/">Home Page</a>
+                                <a href="https://nmap.org/download.html">Installation Guide </a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+
+                        <!-- Entire body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#RustScan"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                RustScan
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="RustScan">
+                            <div class="card card-body padding">
+                                A rapid port scanner that can scan all 65k ports in 3 seconds.
+                                It boasts full scripting engine support that can pipe output into Nmap.
+                                It uses adaptive learning that will fine-tune itself to match your OS.
+                                It also allows automatic piping into Nmap for every (ethical) hacker's desire.
+                                <a href="https://github.com/RustScan/RustScan">Github Home Page</a>
+                                <a href="https://github.com/RustScan/RustScan/wiki/Installation-Guide">Installation
+                                    Guide </a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+
+                        <!-- Entire body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#ns-3"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                ns-3
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="ns-3">
+                            <div class="card card-body padding">
+                                ns-3 is a discrete-event network simulator, that is targeted primarily for research and
+                                educational use.
+                                ns-3 software infrastructure encourages the development of simulation models which are
+                                sufficiently realistic to allow ns-3 to be used as a realtime network emulator,
+                                interconnected with the real world and which allows many existing real-world protocol
+                                implementations to be reused within ns-3.
+                                Very helpful if setting up any collapsibleButton and need to check its validaility.
+                                <a href="https://www.nsnam.org/">Home Page</a>
+                                <a href="https://www.nsnam.org/releases/">Versions for Installation </a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Monitoring tools dropdown -->
+        <div id="accordion">
+            <div class="card accordionBody">
+                <div class="card-header" id="headingSMIDP">
+                    <h5 class="mb-0">
+                        <button class="titleText center btn btn-link" data-toggle="collapse"
+                            data-target="#collapseSMIDP" aria-expanded="false" aria-controls="collapseSMIDP">
+                            Security Monitoring, Intrusion detection/prevention
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseSMIDP" class="collapse center" aria-labelledby="headingSMIDP" data-parent="#accordion">
+                    <div class="card-body">
+                        <!-- Entire body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#Suricata"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Suricata
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="Suricata">
+                            <div class="card card-body">
+                                Suricata is a network analysis and threat detection software used by most private and
+                                public
+                                organizations,
+                                and embedded by major vendors to protect their assets.
+                                Suricata boasts an impressive line up of features that include
+                                Lua scripting, IDS/IPS, High Performance (I would hope so), Logging HTTP requests,
+                                logging and storing TLS certificates, and extracting files from flows and store them to
+                                disk.
+                                Very widely used, and loved, SIEMs are the backbone of our security so it is imparative
+                                to have
+                                one.
+                                <a href="https://suricata.io/">Home Page</a>
+                                <a href="https://suricata.io/download/">Installation Page</a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+
+                        <!-- Entire body for collaspible menu -->
+                        <p>
+                            <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#OSSIM"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                OSSIM
+                            </a>
+                        </p>
+
+                        <!-- Collpasiable card body -->
+                        <div class="collapse multi-collapse" id="OSSIM">
+                            <div class="card card-body">
+                                OSSIM is a C++ written, geospatial image processing library used by many entities
+                                throughout the
+                                solar system.
+                                It has been in active development since the last millenium.
+                                It supports customizing your build by using environment variables and by directly
+                                editing the
+                                cmake configuration script.
+                                <a href="https://github.com/ossimlabs/ossim">Github Page</a>
+                                <a href="https://github.com/ossimlabs/ossim?tab=readme-ov-file#how-to-build">Installation Guide</a>
+                            </div>
+                        </div>
+                        <!-- End of the body for collapisble menu -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="accordion">
+            <div class="card accordionBody">
+                <div class="card-header" id="headingTI">
+                    <h5 class="mb-0">
+                        <button class="titleText center btn btn-link" data-toggle="collapse" data-target="#collapseTI"
+                            aria-expanded="false" aria-controls="collapseTI">
+                            Threat Intelligence
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTI" class="collapse center" aria-labelledby="headingTI" data-parent="#accordion">
+                    <div class="card-body">
+                        <!-- Threat Intelligence tools dropdown -->
+                        <div class="center">
+                            <!-- Add more tools for networking, have a dropdown for the tools -->
+
+                            <!-- Entire body for collaspible menu -->
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#AlienVault"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Alien Vault
+                                </a>
+                            </p>
+
+                            <!-- Collpasiable card body -->
+                            <div class="collapse multi-collapse" id="AlienVault">
+                                <div class="card card-body">
+                                    Open Threat Exchange aka Alien Vault allows everyone to openly collaborate to share
+                                    the latest
+                                    information about emerging threats , attack methods, and malicious actors.
+                                    <a href="https://otx.alienvault.com/">Home Page</a>
+                                </div>
+                            </div>
+                            <!-- End of the body for collapisble menu -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Incident Response tools dropdown -->
+            <div id="accordion">
+                <div class="card accordionBody">
+                    <div class="card-header" id="headingIR">
+                        <h5 class="mb-0">
+                            <button class="titleText center btn btn-link" data-toggle="collapse"
+                                data-target="#collapseIR" aria-expanded="false" aria-controls="collapseIR">
+                                Incident Response
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseIR" class="collapse center" aria-labelledby="headingIR" data-parent="#accordion">
+                        <div class="card-body">
+                            <!-- Add more tools for networking, have a dropdown for the tools -->
+
+                            <!-- Entire body for collaspible menu -->
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#TheHive"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    TheHive
+                                </a>
+                            </p>
+
+                            <!-- Collpasiable card body -->
+                            <div class="collapse multi-collapse" id="TheHive">
+                                <div class="card card-body">
+                                    TheHive is a scalable 3-in-1 open source and free Security Incident Response
+                                    Platform that is designed to make life easier for SOCs, and all information security practitioner.
+                                    It can be synchronized with multiple instances of MISP to start investigations.
+                                    <a href="https://github.com/TheHive-Project/TheHive">Github Page</a>
+                                <a href="https://strangebee.com/">Installation Guide</a>
+                                </div>
+                            </div>
+                            <!-- End of the body for collapisble menu -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vulnerability Assessment tools dropdown -->
+            <div id="accordion">
+                <div class="card accordionBody">
+                    <div class="card-header" id="headingFive">
+                        <h5 class="mb-0">
+                            <button class="titleText center btn btn-link" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                Vulnerability Assessment
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseFive" class="collapse center" aria-labelledby="headingFive"
+                        data-parent="#accordion">
+                        <div class="card-body">
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#WebScarab"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    WebScarab
+                                </a>
+                            </p>
+                            <div class="collapse multi-collapse" id="WebScarab">
+                                <div class="card card-body">
+                                WebScarab's primary purpose is to expose the workings of an HTTP(S)-based application.
+                                It is a framework for analyzing applications that communicate using the HTTP and HTTPS protocols.
+                                It is highly suggested that any user who uses this has a high knowledge of the HTTP protocol.
+                                <a href="https://github.com/OWASP/OWASP-WebScarab/">Github Page</a>
+                                <a href="https://www.acsac.org/2007/downloads/t5-webscarab-instructions.pdf">Installation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Firewall tools dropdown -->
+            <div id="accordion">
+                <div class="card accordionBody">
+                    <div class="card-header" id="headingFirewall">
+                        <h5 class="mb-0">
+                            <button class="titleText center btn btn-link" data-toggle="collapse"
+                                data-target="#collapseFirewall" aria-expanded="false" aria-controls="collapseFirewall">
+                                Firewall
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseFirewall" class="collapse center" aria-labelledby="headingFirewall"
+                        data-parent="#accordion">
+                        <div class="card-body">
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#ExampleFW"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    OPNSense
+                                </a>
+                            </p>
+                            <div class="collapse multi-collapse" id="ExampleFW">
+                                <div class="card card-body">
+                                    Content for Firewall tools.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Antivirus/Endpoint Protection tools dropdown -->
+            <div id="accordion">
+                <div class="card accordionBody">
+                    <div class="card-header" id="headingAntivirus">
+                        <h5 class="mb-0">
+                            <button class="titleText center btn btn-link" data-toggle="collapse"
+                                data-target="#collapseAntivirus" aria-expanded="false"
+                                aria-controls="collapseAntivirus">
+                                Antivirus/Endpoint Protection
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseAntivirus" class="collapse center" aria-labelledby="headingAntivirus"
+                        data-parent="#accordion">
+                        <div class="card-body">
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#ExampleAV"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Example AV
+                                </a>
+                            </p>
+                            <div class="collapse multi-collapse" id="ExampleAV">
+                                <div class="card card-body">
+                                    Content for Antivirus/Endpoint Protection tools.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Security tools dropdown -->
+            <div id="accordion">
+                <div class="card accordionBody">
+                    <div class="card-header" id="headingEmail">
+                        <h5 class="mb-0">
+                            <button class="titleText center btn btn-link" data-toggle="collapse"
+                                data-target="#collapseEmail" aria-expanded="false" aria-controls="collapseEmail">
+                                Email Security
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseEmail" class="collapse center" aria-labelledby="headingEmail"
+                        data-parent="#accordion">
+                        <div class="card-body">
+                            <p>
+                                <a class="collapsibleButton btn btn-primary" data-toggle="collapse" href="#ExampleEmail"
+                                    role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Example Email
+                                </a>
+                            </p>
+                            <div class="collapse multi-collapse" id="ExampleEmail">
+                                <div class="card card-body">
+                                    Content for Email Security tools.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+    </main>
+
+    <!-- Jquery, Popper, and bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

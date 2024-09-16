@@ -37,3 +37,79 @@ footer {
 .contact a:hover {
     text-decoration: underline;
 }
+.genre {
+    font-size: 25px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.collapsibleButton {
+    color: white;
+    background: #0b0c10;
+    border-color: #1f2833;
+}
+
+.collapsibleButtonBody {
+    color: red;
+}
+
+.descriptionText {
+    text-align: center;
+}
+
+.titleText {
+    text-align: center;
+    font-size: 30px;
+    color: black;
+}
+
+.padding {
+    margin-bottom: 10px;
+    /* margin-top: 10px; */
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #1f2833;
+    border-color: #1f2833;
+}
+
+/* Change the background color of the accordion header */
+.card-header {
+    background-color: #1f2833;
+    /* Change to your desired color */
+}
+
+/* Change the text color of the header button */
+.card-header .btn {
+    color: #c5c6c7;
+    /* Text of the accordion body */
+}
+
+/* Optionally change the hover and focus styles */
+.card-header .btn:hover,
+.card-header .btn:focus {
+    color: #45A29E;
+    /* Lighter color for better visibility on hover */
+}
+
+/* Change the background color of the collapsed content */
+.card-body {
+    background-color: #0b0c10;
+    /* Color of the background */
+    color: White;
+    /* Color of text */
+}
+
+.accordionBody{
+    background-color: #0b0c10;
+}

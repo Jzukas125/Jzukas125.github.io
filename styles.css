@@ -6,10 +6,12 @@ body {
     color: #333;
 }
 header {
-    background-color: #333;
+    background-color: #c5c6c7;
     color: #fff;
     padding: 20px;
     text-align: center;
+    border-bottom: ridge black;
+    margin-bottom: 20px;
 }
 section {
     padding: 20px;

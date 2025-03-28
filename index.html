@@ -20,6 +20,18 @@
 </head>
 
 <body>
+
+    <a id="hidden-link" href="hidden.html" style="display: none;">Secret Page</a>
+
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "H") { // Press 'H' to reveal the link
+                document.getElementById("hidden-link").style.display = "inline";
+            }
+        });
+    </script>
+    
+
     <section>
         <h2>About Me</h2>
         <p>Hi, I'm Jacob Zukas, a Computer Science major with a passion for cybersecurity. I'm a detail-oriented and

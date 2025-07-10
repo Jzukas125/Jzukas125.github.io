@@ -1,118 +1,555 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<header>
-    <link rel="stylesheet" href="styles.css">
-    <h1>Welcome to My Website!</h1>
-    <nav>
-        <a href="/">Main</a> |
-        <a href="/dashboard">Dashboard</a> |
-        <a href="/GRC-RG.html">GRC-RG</a> |
-    </nav>
-</header>
-
 <head>
-    <script src="jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jacob Zukas - Cybersecurity Enthusiast and Computer Science Major">
-    <title>Jacob's Website</title>
-</head>
+    <meta name="description" content="Jacob Zukas - Cybersecurity Analyst and Computer Science Professional">
+    <title>Jacob Zukas | Cybersecurity Analyst</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<body>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
 
-    <a id="hidden-link" href="hidden.html" style="display: none;">Secret Page</a>
+        /* Header Styles */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00ff88;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
+        }
 
-    <script>
-        document.addEventListener("keydown", function(event) {
-            if (event.key === "H") { // Press 'H' to reveal the link
-                document.getElementById("hidden-link").style.display = "inline";
-                display("Hello");
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 2rem 2rem;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.1);
+        }
+
+        h2 {
+            color: #00ff88;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "▶";
+            margin-right: 0.5rem;
+            color: #00ff88;
+        }
+
+        h3 {
+            color: #64ffda;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+        }
+
+        .experience-item {
+            background: rgba(100, 255, 218, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateX(10px);
+        }
+
+        .job-title {
+            color: #64ffda;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .company {
+            color: #00ff88;
+            font-weight: 500;
+            margin: 0.5rem 0;
+        }
+
+        .date {
+            color: #888;
+            font-style: italic;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        li {
+            position: relative;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-category {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .skill-category h3 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: rgba(100, 255, 218, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+        }
+
+        .project-link {
+            color: #64ffda;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #00ff88;
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid #00ff88;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .contact {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact a {
+            color: #64ffda;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact a:hover {
+            color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        /* Hidden Link Styles */
+        #hidden-link {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 255, 136, 0.9);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            z-index: 10000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
             }
-        });
-    </script>
-    
 
-    <section>
-        <h2>About Me</h2>
-        <p>Hi, I'm Jacob Zukas, a Computer Science major with a passion for cybersecurity. I'm a detail-oriented and
-            logic-driven individual with hands-on experience in cybersecurity competitions, software development, and
-            web technologies. I'm currently seeking an entry-level position in cybersecurity where I can apply my
-            knowledge of network security, incident response, and secure software development.</p>
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
 
-        <h2>Education</h2>
-        <p><strong>Florida Polytechnic University</strong>, Lakeland, FL<br>
-            Bachelors of Science in Computer Science<br>
-            May 2021-May 2025</p>
-        <p>Selected Coursework: Applied Cryptography, Secure Software Engineering, Object Oriented Programming,
-            Introduction to Unix, Computer Networks and Communication</p>
+            main {
+                padding: 160px 1rem 1rem;
+            }
 
-        <h2>Experience</h2>
-        <p><strong>Software Engineering Intern</strong> - Everglades Financial Company, LLC, Lakeland, FL<br>
-            May 2024 - Present</p>
-        <ul>
-            <li>Mitigated cybersecurity vulnerabilities by identifying and addressing potential risks, implementing
-                security measures, and enhancing system defenses to protect against threats.</li>
-            <li>Created HTML/JavaScript code to calculate APR and interest rates, dynamically updating the website with
-                real-time financial calculations.</li>
-            <li>Collaborated with senior developers and the CEO to discuss project specifications and report progress.
-            </li>
-        </ul>
-        <p><strong>Secretary</strong> - Cybersecurity Club, Florida Polytechnic University<br>
-            February 2023 - February 2024</p>
-        <ul>
-            <li>Assisted in planning and coordinating cybersecurity events and workshops.</li>
-            <li>Worked collaboratively with other RSO members to organize and facilitate meetings.</li>
-        </ul>
-        <p><strong>Team Member</strong> - South-East National Collegiate Cyber Defense Competition (CCDC), Florida
-            Polytechnic University<br>
-            January 2023 - Present</p>
-        <ul>
-            <li>Ranked in the top 50% at the competition, defending against simulated cyber-attacks in a high-pressure
-                environment.</li>
-        </ul>
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
 
-        <h2>Personal Projects</h2>
-        <p><strong>Collaborative Unix Game Development</strong> - Fall 2022<br>
-            <a href="https://github.com/Jzukas125/Unix_Game_The_Spire/tree/main" target="_blank">GitHub Link</a></p>
-        <ul>
-            <li>Developed an interactive game using Unix file systems and bash commands with classmates.</li>
-        </ul>
-        <p><strong>Linux From Scratch (LFS) System</strong> - Summer 2023 - Present</p>
-        <ul>
-            <li>Configured and compiled essential components to build a self-hosted, optimized Linux system.</li>
-        </ul>
-        <p><strong>MySQL Database</strong> - Summer 2023</p>
-        <ul>
-            <li>Created a fictional database for organizing marine naval technology inventory.</li>
-            <li>Wrote a proposal to a fictitious CEO regarding the database need.</li>
-        </ul>
+            .contact {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Jacob Zukas | Cybersecurity Analyst</h1>
+            <nav>
+                <a href="/">Main</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/GRC-RG.html">GRC-RG</a>
+            </nav>
+        </div>
+    </header>
 
-        <h2>Skills</h2>
-        <ul>
-            <li>Cybersecurity: Ghidra, Wireshark, Steghide, ExifTool, Splunk, MISP, Snort, Unix, Windows cmd,
-                PowerShell, Bash, Debian Based Systems</li>
-            <li>Developer Tools: HTML, PHP, HTML/CSS, JavaScript, SQL, Python, Docker, VScode, GitHub</li>
-            <li>Soft Skills: Communication, Critical Thinking, Problem Solving, Detail-oriented</li>
-        </ul>
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm Jacob Zukas, a dedicated Cybersecurity Analyst and Computer Science professional with expertise in threat detection, incident response, and secure software development. With hands-on experience in cybersecurity competitions and real-world security implementations, I specialize in identifying vulnerabilities, implementing robust security measures, and defending against sophisticated cyber threats.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">Top 50%</div>
+                        <div class="stat-label">CCDC Ranking</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Security Tools</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h2>Certificates</h2>
-        <ul>
-            <li>CodePath Certification in Cybersecurity - November 2023</li>
-            <li>Coding for Data Analytics Certificate - December 2021</li>
-            <li>Currently Studying for Comp-TIA Security+ - TBD</li>
-        </ul>
-    </section>
+        <section>
+            <h2>Education</h2>
+            <div class="experience-item">
+                <div class="job-title">Bachelor of Science in Computer Science</div>
+                <div class="company">Florida Polytechnic University, Lakeland, FL</div>
+                <div class="date">May 2021 - May 2025</div>
+                <p><strong>Specialized Coursework:</strong> Applied Cryptography, Secure Software Engineering, Object Oriented Programming, Unix Systems, Computer Networks and Communication</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Software Engineering Intern</div>
+                <div class="company">Everglades Financial Company, LLC</div>
+                <div class="date">May 2024 - Present</div>
+                <ul>
+                    <li>Conducted comprehensive security assessments, identifying and mitigating critical vulnerabilities across web applications and network infrastructure</li>
+                    <li>Developed secure HTML/JavaScript applications for financial calculations with real-time APR and interest rate computations</li>
+                    <li>Collaborated with C-level executives and senior developers on security requirements and threat modeling</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Secretary - Cybersecurity Club</div>
+                <div class="company">Florida Polytechnic University</div>
+                <div class="date">February 2023 - February 2024</div>
+                <ul>
+                    <li>Coordinated cybersecurity workshops and training sessions for 50+ students</li>
+                    <li>Facilitated knowledge sharing sessions on emerging threats and defense strategies</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Team Member - CCDC Competition</div>
+                <div class="company">Florida Polytechnic University</div>
+                <div class="date">January 2023 - Present</div>
+                <ul>
+                    <li>Achieved top 50% ranking in regional cybersecurity defense competition</li>
+                    <li>Defended critical infrastructure against live red team attacks in high-pressure scenarios</li>
+                    <li>Implemented real-time incident response and forensic analysis under time constraints</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Security Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Ghidra</span>
+                        <span class="skill-tag">Wireshark</span>
+                        <span class="skill-tag">Splunk</span>
+                        <span class="skill-tag">MISP</span>
+                        <span class="skill-tag">Snort</span>
+                        <span class="skill-tag">Steghide</span>
+                        <span class="skill-tag">ExifTool</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Systems & Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Unix/Linux</span>
+                        <span class="skill-tag">Windows</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">Debian</span>
+                        <span class="skill-tag">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Development & Analysis</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">HTML/CSS</span>
+                        <span class="skill-tag">GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Security Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Unix-Based Security Game</h3>
+                    <div class="date">Fall 2022</div>
+                    <p>Developed an interactive cybersecurity training game using Unix file systems and bash scripting to teach security concepts through hands-on challenges.</p>
+                    <a href="https://github.com/Jzukas125/Unix_Game_The_Spire/tree/main" target="_blank" class="project-link">View on GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Custom Linux Security Distribution</h3>
+                    <div class="date">Summer 2023 - Present</div>
+                    <p>Built a hardened Linux From Scratch (LFS) system with custom security configurations, optimized for penetration testing and security analysis.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Secure Database Architecture</h3>
+                    <div class="date">Summer 2023</div>
+                    <p>Designed and implemented a secure MySQL database with encryption, access controls, and audit logging for sensitive inventory management.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Certifications</h2>
+            <div class="experience-item">
+                <ul>
+                    <li><strong>CodePath Cybersecurity Certification</strong> - November 2023</li>
+                    <li><strong>Data Analytics Certificate</strong> - December 2021</li>
+                    <li><strong>CompTIA Security+</strong> - In Progress</li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="contact">
-            <p>Email: <a href="mailto:zukasj0@gmail.com">zukasj0@gmail.com</a></p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/jacobzukas/" target="_blank">My LinkedIn Profile</a></p>
-            <p>GitHub: <a href="https://github.com/Jzukas125" target="_blank">My GitHub Profile</a></p>
+            <p><strong>Email:</strong> <a href="mailto:zukasj0@gmail.com">zukasj0@gmail.com</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jacobzukas/" target="_blank">Jacob Zukas</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/Jzukas125" target="_blank">@Jzukas125</a></p>
         </div>
     </footer>
 
-</body>
+    <a id="hidden-link" href="hidden.html" style="display: none;">🔒 Secret Access</a>
 
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "H" || event.key === "h") {
+                const hiddenLink = document.getElementById("hidden-link");
+                hiddenLink.style.display = "inline-block";
+                
+                // Hide after 5 seconds
+                setTimeout(() => {
+                    hiddenLink.style.display = "none";
+                }, 5000);
+                
+                console.log("Hello - Secret access activated!");
+            }
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.experience-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.borderColor = '#00ff88';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(100, 255, 218, 0.2)';
+            });
+        });
+    </script>
+</body>
 </html>

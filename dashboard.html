@@ -739,4 +739,180 @@
                     e.preventDefault();
                     const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
-                        target.scrollIn
+                        target.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                });
+                    }
+                });
+            });
+
+            // Add tooltip functionality
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Add animation to cards when they come into view
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.tool-card, .accordion-item').forEach(card => {
+                observer.observe(card);
+            });
+
+            // Add copy functionality for code snippets
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const code = this.parentElement.querySelector('code');
+                    navigator.clipboard.writeText(code.textContent);
+                    
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                    }, 2000);
+                });
+            });
+
+            // Add search functionality
+            const searchInput = document.createElement('div');
+            searchInput.innerHTML = `
+                <div class="search-container mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text bg-dark text-light border-secondary">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="toolSearch" class="form-control bg-dark text-light border-secondary" 
+                               placeholder="Search security tools...">
+                        <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.querySelector('main').prepend(searchInput.firstChild);
+
+            const toolSearch = document.getElementById('toolSearch');
+            const clearSearch = document.getElementById('clearSearch');
+
+            toolSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                if (searchTerm.length > 0) {
+                    // Show all accordion items
+                    document.querySelectorAll('.accordion-collapse').forEach(collapse => {
+                        const bsCollapse = bootstrap.Collapse.getInstance(collapse) || new bootstrap.Collapse(collapse, {toggle: false});
+                        bsCollapse.show();
+                    });
+                    
+                    // Search through tool cards
+                    let hasResults = false;
+                    document.querySelectorAll('.tool-card').forEach(card => {
+                        const cardText = card.textContent.toLowerCase();
+                        if (cardText.includes(searchTerm)) {
+                            card.style.display = '';
+                            hasResults = true;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide categories based on results
+                    document.querySelectorAll('.accordion-item').forEach(item => {
+                        const categoryTools = item.querySelectorAll('.tool-card');
+                        const visibleTools = Array.from(categoryTools).filter(tool => 
+                            tool.style.display !== 'none'
+                        );
+                        
+                        if (visibleTools.length === 0) {
+                            item.style.display = 'none';
+                        } else {
+                            item.style.display = '';
+                            hasResults = true;
+                        }
+                    });
+                    
+                    // Show no results message
+                    const noResults = document.getElementById('noResults');
+                    if (!hasResults) {
+                        if (!noResults) {
+                            const noResultsDiv = document.createElement('div');
+                            noResultsDiv.id = 'noResults';
+                            noResultsDiv.className = 'alert alert-dark text-center';
+                            noResultsDiv.textContent = 'No tools found matching your search.';
+                            document.querySelector('main').appendChild(noResultsDiv);
+                        }
+                    } else if (noResults) {
+                        noResults.remove();
+                    }
+                } else {
+                    // Reset search
+                    document.querySelectorAll('.tool-card, .accordion-item').forEach(el => {
+                        el.style.display = '';
+                    });
+                    
+                    const noResults = document.getElementById('noResults');
+                    if (noResults) noResults.remove();
+                }
+            });
+
+            clearSearch.addEventListener('click', function() {
+                toolSearch.value = '';
+                toolSearch.dispatchEvent(new Event('input'));
+            });
+
+            // Add keyboard shortcut (Ctrl+K or Cmd+K) to focus search
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    toolSearch.focus();
+                }
+            });
+        });
+    </script>
+
+    <!-- Add animate.css for additional animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Add footer -->
+    <footer class="text-center py-4 mt-5" style="background: rgba(0, 0, 0, 0.7); border-top: 1px solid var(--neon-green);">
+        <div class="container">
+            <p class="mb-2">
+                <strong>Cybersecurity Open Source Dashboard</strong> - A comprehensive collection of security tools
+            </p>
+            <p class="mb-3">
+                <small>
+                    Maintained by the security community | 
+                    <a href="https://github.com/your-repo" target="_blank" class="text-decoration-none" style="color: var(--neon-blue);">
+                        <i class="fab fa-github"></i> Contribute on GitHub
+                    </a>
+                </small>
+            </p>
+            <div class="social-icons">
+                <a href="#" class="text-light mx-2" data-bs-toggle="tooltip" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-light mx-2" data-bs-toggle="tooltip" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" class="text-light mx-2" data-bs-toggle="tooltip" title="Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

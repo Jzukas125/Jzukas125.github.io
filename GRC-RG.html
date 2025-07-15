@@ -70,6 +70,7 @@
                     <div>
                         <label for="reportType" class="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
                         <select id="reportType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="combined">Incident Respnose Plan</option>
                             <option value="compliance">Compliance Report</option>
                             <option value="risk">Risk Assessment</option>
                             <option value="audit">Audit Report</option>
@@ -77,7 +78,7 @@
                         </select>
                     </div>
                     
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Report Scope</label>
                         <div class="space-y-2">
                             <div class="flex items-center">
@@ -93,19 +94,28 @@
                                 <label for="scopeCompliance" class="ml-2 text-sm text-gray-700">Compliance</label>
                             </div>
                         </div>
+                    </div> -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Quarter Selector -->
+                        <div>
+                            <label for="quarter" class="block text-xs font-medium text-gray-600 mb-1">Quarter</label>
+                            <select id="quarter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="q1">Q1</option>
+                                <option value="q2" selected>Q2</option>
+                                <option value="q3">Q3</option>
+                                <option value="q4">Q4</option>
+                                <option value="annual">Annual</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Year Selector -->
+                        <div>
+                            <label for="year" class="block text-xs font-medium text-gray-600 mb-1">Year</label>
+                            <select id="year" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
                     </div>
-                    
-                    <div>
-                        <label for="timeframe" class="block text-sm font-medium text-gray-700 mb-1">Timeframe</label>
-                        <select id="timeframe" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="q1">Q1 2023</option>
-                            <option value="q2" selected>Q2 2023</option>
-                            <option value="q3">Q3 2023</option>
-                            <option value="q4">Q4 2023</option>
-                            <option value="annual">Annual 2023</option>
-                        </select>
-                    </div>
-                    
                     <div>
                         <label for="riskLevel" class="block text-sm font-medium text-gray-700 mb-1">Risk Level Threshold</label>
                         <input type="range" id="riskLevel" min="1" max="5" value="3" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
@@ -335,6 +345,19 @@
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             reportDate.textContent = today.toLocaleDateString('en-US', options);
             
+            // Dynamically populate year selector
+            const yearSelect = document.getElementById('year');
+            const currentYear = new Date().getFullYear();
+            yearSelect.innerHTML = '';
+            for (let i = 0; i <= 10; i++) {
+                const year = currentYear + i;
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                if (i === 0) option.selected = true;
+                yearSelect.appendChild(option);
+            }
+            
             // Generate report
             reportForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -353,50 +376,51 @@
                     // Get form values
                     const organization = document.getElementById('organization').value || 'Sample Organization';
                     const reportType = document.getElementById('reportType').value;
-                    const timeframe = document.getElementById('timeframe').value;
+                    const timeframe = document.getElementById('quarter').value;
+                    const year = document.getElementById('year').value;
                     const riskLevel = document.getElementById('riskLevel').value;
                     const notes = document.getElementById('additionalNotes').value;
-                    
+
                     // Update report title based on type
                     let title = '';
                     switch(reportType) {
                         case 'compliance':
-                            title = `${organization} Compliance Report`;
+                            title = `${organization} Compliance Report (${year})`;
                             break;
                         case 'risk':
-                            title = `${organization} Risk Assessment`;
+                            title = `${organization} Risk Assessment (${year})`;
                             break;
                         case 'audit':
-                            title = `${organization} Internal Audit Report`;
+                            title = `${organization} Internal Audit Report (${year})`;
                             break;
                         default:
-                            title = `${organization} GRC Report`;
+                            title = `${organization} GRC Report (${year})`;
                     }
                     reportTitle.textContent = title;
-                    
+
                     // Update report subtitle
                     let timeframeText = '';
                     switch(timeframe) {
                         case 'q1':
-                            timeframeText = 'Q1 2023';
+                            timeframeText = `Q1 ${year}`;
                             break;
                         case 'q2':
-                            timeframeText = 'Q2 2023';
+                            timeframeText = `Q2 ${year}`;
                             break;
                         case 'q3':
-                            timeframeText = 'Q3 2023';
+                            timeframeText = `Q3 ${year}`;
                             break;
                         case 'q4':
-                            timeframeText = 'Q4 2023';
+                            timeframeText = `Q4 ${year}`;
                             break;
                         case 'annual':
-                            timeframeText = 'Annual 2023';
+                            timeframeText = `Annual ${year}`;
                             break;
                     }
                     reportSubtitle.textContent = `${timeframeText} Report | Generated on ${today.toLocaleDateString('en-US', options)}`;
                     
                     // Update executive summary
-                    let summary = `This ${timeframeText.toLowerCase()} ${reportType === 'combined' ? 'GRC' : reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture. `;
+                    let summary = `This ${timeframeText.toLowerCase()} ${reportType === 'combined' ? 'GRC' : reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture for ${year}. `;
                     
                     if (riskLevel >= 4) {
                         summary += `The organization faces significant risks that require immediate attention, particularly in the area of cybersecurity. `;
@@ -420,9 +444,13 @@
                                         riskLevel >= 2 ? 'bg-yellow-500 h-2.5 rounded-full' : 'bg-green-500 h-2.5 rounded-full';
                     
                     // Toggle sections based on checkboxes
-                    const showGovernance = document.getElementById('scopeGovernance').checked;
-                    const showRisk = document.getElementById('scopeRisk').checked;
-                    const showCompliance = document.getElementById('scopeCompliance').checked;
+                    const governanceEl = document.getElementById('scopeGovernance');
+                    const riskEl = document.getElementById('scopeRisk');
+                    const complianceEl = document.getElementById('scopeCompliance');
+
+                    const showGovernance = governanceEl ? governanceEl.checked : true;
+                    const showRisk = riskEl ? riskEl.checked : true;
+                    const showCompliance = complianceEl ? complianceEl.checked : true;
                     
                     document.getElementById('governanceSection').style.display = showGovernance ? 'block' : 'none';
                     document.getElementById('riskSection').style.display = showRisk ? 'block' : 'none';

@@ -100,10 +100,10 @@
                         <div>
                             <label for="quarter" class="block text-xs font-medium text-gray-600 mb-1">Quarter</label>
                             <select id="quarter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="q1">Q1</option>
-                                <option value="q2" selected>Q2</option>
-                                <option value="q3">Q3</option>
-                                <option value="q4">Q4</option>
+                                <option value="Q1">Q1</option>
+                                <option value="Q2" selected>Q2</option>
+                                <option value="Q3">Q3</option>
+                                <option value="Q4">Q4</option>
                                 <option value="annual">Annual</option>
                             </select>
                         </div>
@@ -401,16 +401,16 @@
                     // Update report subtitle
                     let timeframeText = '';
                     switch(timeframe) {
-                        case 'q1':
+                        case 'Q1':
                             timeframeText = `Q1 ${year}`;
                             break;
-                        case 'q2':
+                        case 'Q2':
                             timeframeText = `Q2 ${year}`;
                             break;
-                        case 'q3':
+                        case 'Q3':
                             timeframeText = `Q3 ${year}`;
                             break;
-                        case 'q4':
+                        case 'Q4':
                             timeframeText = `Q4 ${year}`;
                             break;
                         case 'annual':
@@ -420,7 +420,7 @@
                     reportSubtitle.textContent = `${timeframeText} Report | Generated on ${today.toLocaleDateString('en-US', options)}`;
                     
                     // Update executive summary
-                    let summary = `This ${timeframeText.toLowerCase()} ${reportType === 'combined' ? 'GRC' : reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture for ${year}. `;
+                    let summary = `This ${timeframeText} ${reportType === 'combined' ? 'GRC' : reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture for ${year}. `;
                     
                     if (riskLevel >= 4) {
                         summary += `The organization faces significant risks that require immediate attention, particularly in the area of cybersecurity. `;

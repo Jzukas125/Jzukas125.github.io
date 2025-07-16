@@ -146,9 +146,7 @@
                             <button id="downloadPdf" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm flex items-center">
                                 <i class="fas fa-file-pdf mr-1 text-red-500"></i> PDF
                             </button>
-                            <button id="downloadDoc" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm flex items-center">
-                                <i class="fas fa-file-word mr-1 text-blue-500"></i> Word
-                            </button>
+
                         </div>
                     </div>
                     
@@ -165,9 +163,6 @@
                                     <h1 id="reportTitle" class="text-2xl font-bold text-gray-800">GRC Report</h1>
                                     <p id="reportSubtitle" class="text-gray-600">Generated on <span id="reportDate"></span></p>
                                 </div>
-                                <div class="bg-blue-50 p-2 rounded-md">
-                                    <p class="text-xs font-medium text-blue-800">CONFIDENTIAL</p>
-                                </div>
                             </div>
                         </div>
                         
@@ -176,132 +171,11 @@
                             <h2 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Executive Summary</h2>
                             <p id="execSummary" class="text-gray-700"></p>
                         </div>
-                        
-                        <!-- Governance Section -->
-                        <div id="governanceSection" class="mb-8">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Governance Overview</h2>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <div class="bg-blue-50 p-4 rounded-md">
-                                    <p class="text-xs font-medium text-blue-800 mb-1">POLICIES</p>
-                                    <p class="text-xl font-bold text-blue-600">12</p>
-                                    <p class="text-xs text-blue-600">in place</p>
-                                </div>
-                                <div class="bg-blue-50 p-4 rounded-md">
-                                    <p class="text-xs font-medium text-blue-800 mb-1">CONTROLS</p>
-                                    <p class="text-xl font-bold text-blue-600">87%</p>
-                                    <p class="text-xs text-blue-600">effectiveness</p>
-                                </div>
-                                <div class="bg-blue-50 p-4 rounded-md">
-                                    <p class="text-xs font-medium text-blue-800 mb-1">ALIGNMENT</p>
-                                    <p class="text-xl font-bold text-blue-600">94%</p>
-                                    <p class="text-xs text-blue-600">with strategy</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700">The governance framework demonstrates strong alignment with organizational objectives. Key policies are in place and regularly reviewed. The control environment is operating effectively with minor exceptions noted in the IT governance area.</p>
-                        </div>
-                        
-                        <!-- Risk Section -->
-                        <div id="riskSection" class="mb-8">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Risk Assessment</h2>
-                            <div class="mb-4">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm font-medium text-gray-700">Risk Exposure</span>
-                                    <span id="riskScore" class="text-sm font-medium text-gray-700">Medium (3.2/5)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div id="riskBar" class="bg-yellow-500 h-2.5 rounded-full" style="width: 64%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="space-y-3 mb-4">
-                                <div class="p-3 rounded-md risk-high">
-                                    <div class="flex justify-between">
-                                        <p class="font-medium">Cybersecurity Threats</p>
-                                        <span class="text-xs font-bold bg-red-500 text-white px-2 py-0.5 rounded-full">HIGH</span>
-                                    </div>
-                                    <p class="text-sm mt-1">Increased phishing attempts and ransomware threats identified. Requires immediate attention.</p>
-                                </div>
-                                <div class="p-3 rounded-md risk-medium">
-                                    <div class="flex justify-between">
-                                        <p class="font-medium">Regulatory Changes</p>
-                                        <span class="text-xs font-bold bg-yellow-500 text-white px-2 py-0.5 rounded-full">MEDIUM</span>
-                                    </div>
-                                    <p class="text-sm mt-1">Upcoming changes to data privacy regulations may require policy updates.</p>
-                                </div>
-                                <div class="p-3 rounded-md risk-low">
-                                    <div class="flex justify-between">
-                                        <p class="font-medium">Vendor Management</p>
-                                        <span class="text-xs font-bold bg-green-500 text-white px-2 py-0.5 rounded-full">LOW</span>
-                                    </div>
-                                    <p class="text-sm mt-1">Vendor risk assessments are up-to-date with no critical issues identified.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Compliance Section -->
-                        <div id="complianceSection" class="mb-8">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Compliance Status</h2>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Standard</th>
-                                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Audit</th>
-                                            <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Next Review</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">ISO 27001</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Certified</span>
-                                            </td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-03-15</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2024-03-15</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">GDPR</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Compliant</span>
-                                            </td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-02-28</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-08-31</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">SOC 2</td>
-                                            <td class="px-4 py-3 whitespace-nowrap">
-                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">In Progress</span>
-                                            </td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2022-11-10</td>
-                                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">2023-09-30</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        
-                        <!-- Recommendations -->
-                        <div id="recommendationsSection">
-                            <h2 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Recommendations</h2>
-                            <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                                <li>Enhance cybersecurity training program with quarterly phishing simulations</li>
-                                <li>Conduct a comprehensive review of data privacy policies in light of upcoming regulatory changes</li>
-                                <li>Implement additional monitoring controls for third-party vendor access</li>
-                                <li>Schedule SOC 2 Type II audit preparation workshops for Q3</li>
-                                <li>Review and update business continuity plans to address emerging risks</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 
                 <!-- Report Actions -->
                 <div class="flex justify-end space-x-3">
                     <button id="saveReport" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-md transition duration-300 flex items-center">
                         <i class="fas fa-save mr-2"></i> Save Draft
-                    </button>
-                    <button id="newReport" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-300 flex items-center">
-                        <i class="fas fa-plus mr-2"></i> New Report
                     </button>
                 </div>
             </div>
@@ -437,11 +311,15 @@
                     
                     // Update risk score and bar
                     const riskValue = (riskLevel / 5) * 100;
-                    riskScore.textContent = riskLevel >= 4 ? `High (${riskLevel}/5)` : 
-                                           riskLevel >= 2 ? `Medium (${riskLevel}/5)` : `Low (${riskLevel}/5)`;
-                    riskBar.style.width = `${riskValue}%`;
-                    riskBar.className = riskLevel >= 4 ? 'bg-red-500 h-2.5 rounded-full' : 
-                                        riskLevel >= 2 ? 'bg-yellow-500 h-2.5 rounded-full' : 'bg-green-500 h-2.5 rounded-full';
+                    if (riskScore) {
+                        riskScore.textContent = riskLevel >= 4 ? `High (${riskLevel}/5)` : 
+                            riskLevel >= 2 ? `Medium (${riskLevel}/5)` : `Low (${riskLevel}/5)`;
+                    }
+                    if (riskBar) {
+                        riskBar.style.width = `${riskValue}%`;
+                        riskBar.className = riskLevel >= 4 ? 'bg-red-500 h-2.5 rounded-full' : 
+                            riskLevel >= 2 ? 'bg-yellow-500 h-2.5 rounded-full' : 'bg-green-500 h-2.5 rounded-full';
+                    }
                     
                     // Toggle sections based on checkboxes
                     const governanceEl = document.getElementById('scopeGovernance');
@@ -451,76 +329,77 @@
                     const showGovernance = governanceEl ? governanceEl.checked : true;
                     const showRisk = riskEl ? riskEl.checked : true;
                     const showCompliance = complianceEl ? complianceEl.checked : true;
-                    
-                    document.getElementById('governanceSection').style.display = showGovernance ? 'block' : 'none';
-                    document.getElementById('riskSection').style.display = showRisk ? 'block' : 'none';
-                    document.getElementById('complianceSection').style.display = showCompliance ? 'block' : 'none';
-                    
+                                        
                     // Show report
                     reportPlaceholder.classList.add('hidden');
                     reportOutput.classList.remove('hidden');
                 }, 1500);
             });
             
-            // New report button
-            newReportBtn.addEventListener('click', function() {
-                reportOutput.classList.add('hidden');
-                reportPlaceholder.classList.remove('hidden');
-                reportPlaceholder.innerHTML = `
-                    <i class="fas fa-file-alt text-4xl text-gray-300 mb-4"></i>
-                    <p class="text-gray-500">Configure and generate your GRC report</p>
-                `;
-                reportForm.reset();
-            });
             
             // Save report button
-            saveReportBtn.addEventListener('click', function() {
-                if (reportOutput.classList.contains('hidden')) {
-                    alert('Please generate a report first');
-                    return;
-                }
-                
-                // Show saving indicator
-                const originalText = saveReportBtn.innerHTML;
-                saveReportBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Saving...`;
-                saveReportBtn.disabled = true;
-                
-                // Simulate save action
-                setTimeout(() => {
-                    saveReportBtn.innerHTML = originalText;
-                    saveReportBtn.disabled = false;
+            if (saveReportBtn) {
+                saveReportBtn.addEventListener('click', function() {
+                    if (reportOutput.classList.contains('hidden')) {
+                        alert('Please generate a report first');
+                        return;
+                    }
                     
-                    // Show success message
-                    const toast = document.createElement('div');
-                    toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg flex items-center';
-                    toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i> Report saved successfully`;
-                    document.body.appendChild(toast);
+                    // Show saving indicator
+                    const originalText = saveReportBtn.innerHTML;
+                    saveReportBtn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Saving...`;
+                    saveReportBtn.disabled = true;
                     
+                    // Simulate save action
                     setTimeout(() => {
-                        toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
-                        setTimeout(() => toast.remove(), 300);
-                    }, 3000);
-                }, 1000);
-            });
+                        saveReportBtn.innerHTML = originalText;
+                        saveReportBtn.disabled = false;
+                        
+                        // Show success message
+                        const toast = document.createElement('div');
+                        toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg flex items-center';
+                        toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i> Report saved successfully`;
+                        document.body.appendChild(toast);
+                        
+                        setTimeout(() => {
+                            toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+                            setTimeout(() => toast.remove(), 300);
+                        }, 3000);
+                    }, 1000);
+                });
+            }
             
             // Download buttons
-            downloadPdfBtn.addEventListener('click', function() {
-                if (reportOutput.classList.contains('hidden')) {
-                    alert('Please generate a report first');
-                    return;
-                }
-                
-                alert('PDF download would be initiated here');
-            });
-            
-            downloadDocBtn.addEventListener('click', function() {
-                if (reportOutput.classList.contains('hidden')) {
-                    alert('Please generate a report first');
-                    return;
-                }
-                
-                alert('Word document download would be initiated here');
-            });
+            if (downloadPdfBtn) {
+                downloadPdfBtn.addEventListener('click', function() {
+                    if (reportOutput.classList.contains('hidden')) {
+                        alert('Please generate a report first');
+                        return;
+                    }
+                    
+                    alert('PDF download would be initiated here');
+                });
+            }
+            if (downloadDocBtn) {
+                downloadDocBtn.addEventListener('click', function() {
+                    if (reportOutput.classList.contains('hidden')) {
+                        alert('Please generate a report first');
+                        return;
+                    }
+                    alert('Word document download would be initiated here');
+                });
+            }
+            if (newReportBtn) {
+                newReportBtn.addEventListener('click', function() {
+                    reportOutput.classList.add('hidden');
+                    reportPlaceholder.classList.remove('hidden');
+                    reportPlaceholder.innerHTML = `
+                        <i class="fas fa-file-alt text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500">Configure and generate your GRC report</p>
+                    `;
+                    reportForm.reset();
+                });
+            }
         });
     </script>
 </body>

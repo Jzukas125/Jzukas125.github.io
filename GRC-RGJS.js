@@ -1,5 +1,97 @@
+
+/*
+Author: Jacob Zukas
+Date: 7/17/2025
+Description: GRC Report Generation Script
+This script handles the generation of GRC reports, including incident response, compliance, risk assessment, and internal audit reports.
+It uses Groq SDK for AI-powered content generation and provides a user-friendly interface for report customization
+
+*/
 // Use strict mode for better error handling
 'use strict';
+
+    export default {
+    async fetch(request, env) {
+        // Basic CORS support (so your GitHub Pages frontend can call it)
+        if (request.method === "OPTIONS") {
+        return new Response(null, {
+            headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type"
+            }
+        });
+        }
+
+        if (request.method !== "POST") {
+        return new Response(
+            JSON.stringify({ error: "POST only" }),
+            {
+            status: 405,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+            }
+        );
+        }
+
+        let body;
+        try {
+        body = await request.json();
+        } catch {
+        return new Response(
+            JSON.stringify({ error: "Invalid JSON body" }),
+            {
+            status: 400,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+            }
+        );
+        }
+
+        const prompt = body?.prompt;
+        if (!prompt) {
+        return new Response(
+            JSON.stringify({ error: "Missing 'prompt' in body" }),
+            {
+            status: 400,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }
+            }
+        );
+        }
+
+        // Call Groq's OpenAI-compatible endpoint using your secret
+        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${env.GROQ_API_KEY}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            model: "llama3-8b-8192",
+            messages: [{ role: "user", content: prompt }]
+        })
+        });
+
+        const data = await groqRes.json();
+
+        // Pass Groq response through
+        return new Response(JSON.stringify(data), {
+        status: groqRes.status,
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        }
+        });
+    }
+    };
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const reportForm = document.getElementById('reportForm');
@@ -31,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Generate report
-    reportForm.addEventListener('submit', function(e) {
+    reportForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         reportPlaceholder.innerHTML = `
             <div class="animate-pulse flex flex-col items-center">
@@ -40,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="h-3 w-48 bg-gray-200 rounded"></div>
             </div>
         `;
-        setTimeout(() => {
+        setTimeout(async () => {
             const organization = document.getElementById('organization').value || 'Sample Organization';
             const reportType = document.getElementById('reportType').value;
             const timeframe = document.getElementById('quarter').value;

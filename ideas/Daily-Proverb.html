@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Proverb Discord Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .proverb-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            border-left: 4px solid #e53e3e;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: absolute;
+                z-index: 10;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-gray-900 text-white w-64 flex-shrink-0">
+            <div class="p-4 flex items-center space-x-2 border-b border-gray-700">
+                <i class="fas fa-dragon text-red-500 text-2xl"></i>
+                <h1 class="text-xl font-bold">Proverb Bot</h1>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-gray-800 bg-gray-800">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-gray-800">
+                            <i class="fas fa-calendar-day"></i>
+                            <span>Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-gray-800">
+                            <i class="fas fa-book"></i>
+                            <span>Proverb Library</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 rounded hover:bg-gray-800">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Mobile Header -->
+            <header class="bg-white shadow-sm p-4 flex items-center justify-between lg:hidden">
+                <button id="menu-toggle" class="text-gray-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold text-gray-800">Proverb Bot Dashboard</h1>
+                <div class="w-6"></div> <!-- Spacer for alignment -->
+            </header>
+
+            <!-- Desktop Header -->
+            <header class="bg-white shadow-sm p-4 hidden lg:block">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">Proverb Bot Dashboard</h1>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Bot+Admin&background=ef4444&color=fff" alt="User" class="w-8 h-8 rounded-full">
+                            <span class="font-medium">Admin</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="p-4 md:p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Servers</p>
+                                <h3 class="text-2xl font-bold">128</h3>
+                            </div>
+                            <div class="p-3 rounded-full bg-red-100 text-red-500">
+                                <i class="fas fa-server text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Daily Proverbs</p>
+                                <h3 class="text-2xl font-bold">365</h3>
+                            </div>
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-500">
+                                <i class="fas fa-calendar-check text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Active Users</p>
+                                <h3 class="text-2xl font-bold">5,421</h3>
+                            </div>
+                            <div class="p-3 rounded-full bg-green-100 text-green-500">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Uptime</p>
+                                <h3 class="text-2xl font-bold">99.9%</h3>
+                            </div>
+                            <div class="p-3 rounded-full bg-yellow-100 text-yellow-500">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Proverb -->
+                <div class="bg-white rounded-lg shadow mb-6 overflow-hidden">
+                    <div class="bg-red-500 text-white p-4">
+                        <h2 class="text-xl font-bold">Today's Chinese Proverb</h2>
+                        <p class="text-sm opacity-90">Automatically posted to all servers</p>
+                    </div>
+                    <div class="p-6 proverb-card">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">千里之行，始于足下</h3>
+                                <p class="text-gray-600 italic mb-4">Qiān lǐ zhī xíng, shǐ yú zú xià</p>
+                                <p class="text-gray-700">"A journey of a thousand miles begins with a single step."</p>
+                                <p class="mt-3 text-gray-600">This proverb emphasizes the importance of starting any endeavor, no matter how small the first step may seem. Great accomplishments are achieved through persistence and taking that initial action.</p>
+                            </div>
+                            <div class="mt-4 md:mt-0 md:ml-6">
+                                <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Chinese proverb illustration" class="w-full md:w-48 rounded-lg shadow">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                        <div class="text-sm text-gray-500">
+                            <i class="far fa-clock mr-1"></i> Posted today at 8:00 AM UTC
+                        </div>
+                        <div>
+                            <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mr-2">
+                                <i class="fas fa-share-alt mr-2"></i>Share
+                            </button>
+                            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md">
+                                <i class="fas fa-history mr-2"></i>History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Proverbs -->
+                <div class="bg-white rounded-lg shadow mb-6">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Upcoming Proverbs</h2>
+                    </div>
+                    <div class="p-4">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Proverb (Chinese)</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pinyin</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Translation</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Tomorrow</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">失败乃成功之母</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Shībài nǎi chénggōng zhī mǔ</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">"Failure is the mother of success"</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <button class="text-red-500 hover:text-red-700 mr-3">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Jun 15, 2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">读万卷书，行万里路</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dú wàn juǎn shū, xíng wàn lǐ lù</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">"Read ten thousand books, walk ten thousand miles"</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <button class="text-red-500 hover:text-red-700 mr-3">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Jun 16, 2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">己所不欲，勿施于人</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Jǐ suǒ bù yù, wù shī yú rén</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500">"Do not do to others what you do not want done to yourself"</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <button class="text-red-500 hover:text-red-700 mr-3">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-gray-500 hover:text-gray-700">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                Showing 1 to 3 of 365 entries
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-white text-gray-700 hover:bg-gray-50">
+                                    Previous
+                                </button>
+                                <button class="px-3 py-1 border border-red-500 rounded-md text-sm bg-red-500 text-white hover:bg-red-600">
+                                    1
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-white text-gray-700 hover:bg-gray-50">
+                                    2
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-white text-gray-700 hover:bg-gray-50">
+                                    3
+                                </button>
+                                <span class="px-2 py-1">...</span>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-white text-gray-700 hover:bg-gray-50">
+                                    122
+                                </button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-white text-gray-700 hover:bg-gray-50">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add New Proverb -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-xl font-bold text-gray-800">Add New Proverb</h2>
+                    </div>
+                    <div class="p-6">
+                        <form>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="chinese" class="block text-sm font-medium text-gray-700 mb-1">Chinese Characters</label>
+                                    <input type="text" id="chinese" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Enter the proverb in Chinese">
+                                </div>
+                                <div>
+                                    <label for="pinyin" class="block text-sm font-medium text-gray-700 mb-1">Pinyin</label>
+                                    <input type="text" id="pinyin" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Enter the pinyin">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="translation" class="block text-sm font-medium text-gray-700 mb-1">English Translation</label>
+                                    <input type="text" id="translation" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Enter the English translation">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="explanation" class="block text-sm font-medium text-gray-700 mb-1">Explanation</label>
+                                    <textarea id="explanation" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Explain the meaning and context of the proverb"></textarea>
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Schedule Date</label>
+                                    <input type="date" id="date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                                </div>
+                                <div>
+                                    <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Image (Optional)</label>
+                                    <input type="file" id="image" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                                </div>
+                            </div>
+                            <div class="mt-6 flex justify-end space-x-3">
+                                <button type="button" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-red-500 hover:bg-red-600">
+                                    Schedule Proverb
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Sample data for demonstration
+        const sampleProverbs = [
+            {
+                chinese: "塞翁失马，焉知非福",
+                pinyin: "Sài wēng shī mǎ, yān zhī fēi fú",
+                translation: "When the old man lost his horse, how could one know it was not a blessing?",
+                meaning: "Misfortune may be a blessing in disguise."
+            },
+            {
+                chinese: "一言既出，驷马难追",
+                pinyin: "Yī yán jì chū, sì mǎ nán zhuī",
+                translation: "Once words are spoken, they are hard to take back even with four horses.",
+                meaning: "You can't take back what you've said."
+            },
+            {
+                chinese: "冰冻三尺，非一日之寒",
+                pinyin: "Bīng dòng sān chǐ, fēi yī rì zhī hán",
+                translation: "Three feet of ice does not form in a single day.",
+                meaning: "Rome wasn't built in a day."
+            }
+        ];
+
+        // You would integrate with actual bot functionality here
+        console.log("Chinese Proverb Bot Dashboard Loaded");
+    </script>
+</body>
+</html>

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveReportBtn = document.getElementById('saveReport');
     const downloadPdfBtn = document.getElementById('downloadPdf');
 
-    const GROQ_API_KEY = "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";
+    const GROQ_API_KEY = "";
 
     // Set current date
     const today = new Date();

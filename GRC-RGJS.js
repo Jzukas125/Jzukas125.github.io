@@ -1,97 +1,12 @@
-
 /*
 Author: Jacob Zukas
 Date: 7/17/2025
 Description: GRC Report Generation Script
 This script handles the generation of GRC reports, including incident response, compliance, risk assessment, and internal audit reports.
-It uses Groq SDK for AI-powered content generation and provides a user-friendly interface for report customization
-
+It uses Groq API for AI-powered content generation and provides a user-friendly interface for report customization
 */
-// Use strict mode for better error handling
+
 'use strict';
-
-    export default {
-    async fetch(request, env) {
-        // Basic CORS support (so your GitHub Pages frontend can call it)
-        if (request.method === "OPTIONS") {
-        return new Response(null, {
-            headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type"
-            }
-        });
-        }
-
-        if (request.method !== "POST") {
-        return new Response(
-            JSON.stringify({ error: "POST only" }),
-            {
-            status: 405,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            }
-            }
-        );
-        }
-
-        let body;
-        try {
-        body = await request.json();
-        } catch {
-        return new Response(
-            JSON.stringify({ error: "Invalid JSON body" }),
-            {
-            status: 400,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            }
-            }
-        );
-        }
-
-        const prompt = body?.prompt;
-        if (!prompt) {
-        return new Response(
-            JSON.stringify({ error: "Missing 'prompt' in body" }),
-            {
-            status: 400,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            }
-            }
-        );
-        }
-
-        // Call Groq's OpenAI-compatible endpoint using your secret
-        const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${env.GROQ_API_KEY}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            model: "llama3-8b-8192",
-            messages: [{ role: "user", content: prompt }]
-        })
-        });
-
-        const data = await groqRes.json();
-
-        // Pass Groq response through
-        return new Response(JSON.stringify(data), {
-        status: groqRes.status,
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        }
-        });
-    }
-    };
-
 
 document.addEventListener('DOMContentLoaded', function() {
     const reportForm = document.getElementById('reportForm');
@@ -103,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const execSummary = document.getElementById('execSummary');
     const saveReportBtn = document.getElementById('saveReport');
     const downloadPdfBtn = document.getElementById('downloadPdf');
+
+    const GROQ_API_KEY = "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";
 
     // Set current date
     const today = new Date();
@@ -125,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Generate report
     reportForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // Show loading state immediately
+        reportPlaceholder.classList.remove('hidden');
+        reportOutput.classList.add('hidden');
         reportPlaceholder.innerHTML = `
             <div class="animate-pulse flex flex-col items-center">
                 <div class="h-12 w-12 bg-blue-200 rounded-full mb-4"></div>
@@ -132,64 +53,92 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="h-3 w-48 bg-gray-200 rounded"></div>
             </div>
         `;
-        setTimeout(async () => {
-            const organization = document.getElementById('organization').value || 'Sample Organization';
-            const reportType = document.getElementById('reportType').value;
-            const timeframe = document.getElementById('quarter').value;
-            const year = yearSelect.value;
+        
+        const organization = document.getElementById('organization').value || 'Sample Organization';
+        const reportType = document.getElementById('reportType').value;
+        const timeframe = document.getElementById('quarter').value;
+        const year = yearSelect.value;
+        
+        // Title
+        let title = '';
+        switch(reportType) {
+            case 'irc':
+                title = `${organization} Incident Response (${year})`;
+                break;
+            case 'compliance':
+                title = `${organization} Compliance Report (${year})`;
+                break;
+            case 'risk':
+                title = `${organization} Risk Assessment (${year})`;
+                break;
+            case 'audit':
+                title = `${organization} Internal Audit Report (${year})`;
+                break;
+            default:
+                title = `${organization} GRC Report (${year})`;
+        }
+        reportTitle.textContent = title;
 
-            // Title
-            let title = '';
-            switch(reportType) {
-                case 'irc':
-                    title = `${organization} Incident Response (${year})`;
-                    break;
-                case 'compliance':
-                    title = `${organization} Compliance Report (${year})`;
-                    break;
-                case 'risk':
-                    title = `${organization} Risk Assessment (${year})`;
-                    break;
-                case 'audit':
-                    title = `${organization} Internal Audit Report (${year})`;
-                    break;
-                default:
-                    title = `${organization} GRC Report (${year})`;
+        // Subtitle
+        let timeframeText = '';
+        switch(timeframe) {
+            case 'Q1': timeframeText = `Q1 ${year}`; break;
+            case 'Q2': timeframeText = `Q2 ${year}`; break;
+            case 'Q3': timeframeText = `Q3 ${year}`; break;
+            case 'Q4': timeframeText = `Q4 ${year}`; break;
+            case 'annual': timeframeText = `Annual ${year}`; break;
+        }
+        reportSubtitle.textContent = `${timeframeText} Report | Generated on ${today.toLocaleDateString('en-US', options)}`;
+
+        // Build prompt for AI, change to allow for some user input later
+        const prompt = `
+Write Section 3 of a NIST SP 800-61 Rev. 2 Incident Response Plan titled "Handling Incidents".
+Include:
+- 3.1 Preparation
+- 3.2 Detection and Analysis
+- 3.3 Containment, Eradication, and Recovery
+- 3.4 Post-Incident Activity
+
+Target this for a financial institution such as a bank or fintech. Ensure the tone is formal and compliant with NIST, PCI DSS, and FFIEC best practices.
+        `;
+
+        try {
+            const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${GROQ_API_KEY}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    model: "llama-3.1-8b-instant",
+                    messages: [
+                        { role: "system", content: 
+                            "You are a senior cybersecurity engineer writing GRC documentation. Write this MLA format, including the correct indentation and do not use markdown. This will be exported into a pdf, so be mindful when creating this" },
+                        { role: "user", content: prompt.trim() } // Trim extra whitespace
+                    ]
+                })
+            });
+
+            if (!groqRes.ok) {
+                const errorData = await groqRes.json();
+                throw new Error(`API Error: ${groqRes.status} ${groqRes.statusText} - ${JSON.stringify(errorData)}`);
             }
-            reportTitle.textContent = title;
 
-            // Subtitle
-            let timeframeText = '';
-            switch(timeframe) {
-                case 'Q1':
-                    timeframeText = `Q1 ${year}`;
-                    break;
-                case 'Q2':
-                    timeframeText = `Q2 ${year}`;
-                    break;
-                case 'Q3':
-                    timeframeText = `Q3 ${year}`;
-                    break;
-                case 'Q4':
-                    timeframeText = `Q4 ${year}`;
-                    break;
-                case 'annual':
-                    timeframeText = `Annual ${year}`;
-                    break;
-            }
-            reportSubtitle.textContent = `${timeframeText} Report | Generated on ${today.toLocaleDateString('en-US', options)}`;
+            const data = await groqRes.json();
+            const aiReport = data.choices?.[0]?.message?.content || "No content returned from the API.";
 
-            // Executive summary
-            let summary = `This ${timeframeText} ${reportType === 'combined' ? 'GRC' : reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture for ${year}. `;
-            execSummary.textContent = summary;
-
-            
-            // Show report
+            // Executive summary + AI section
+            execSummary.textContent = `This ${timeframeText} ${reportType} report provides an overview of ${organization}'s governance, risk, and compliance posture for ${year}.\n\n${aiReport}`;
+        } catch (err) {
+            execSummary.textContent = "Error generating report: " + err.message;
+            console.error("Fetch Error:", err);
+        } finally {
+            // Hide placeholder and show report whether successful or not
             reportPlaceholder.classList.add('hidden');
             reportOutput.classList.remove('hidden');
-        }, 1500);
+        }
     });
-    
+
     // Save report button
     if (saveReportBtn) {
         saveReportBtn.addEventListener('click', function() {
@@ -214,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         });
     }
-    
+
     // Download PDF button
     if (downloadPdfBtn) {
         downloadPdfBtn.addEventListener('click', function() {
